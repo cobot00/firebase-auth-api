@@ -44,3 +44,7 @@ jobs:
       - run:
           name: ./linter.sh
           command: ./linter.sh
+
+      - run:
+          name: Run rspec
+          command: bundle exec rspec spec
