@@ -76,9 +76,6 @@ Metrics/PerceivedComplexity:
 ModuleLength:
   Enabled: false
 
-Style/ClassAndModuleCamelCase:
-  Enabled: false
-
 Style/Documentation:
   Enabled: false
 
