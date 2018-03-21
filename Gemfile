@@ -12,6 +12,7 @@ gem 'puma', '~> 3.7'
 
 group :development, :test do
   gem 'rubocop', '0.53.0', require: false
+  gem 'rspec-rails', '~> 3.7'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
