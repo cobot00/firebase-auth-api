@@ -10,6 +10,8 @@ gem 'rails', '~> 5.1.5'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 
+gem 'jwt', '2.1.0'
+
 group :development, :test do
   gem 'rubocop', '0.53.0', require: false
   gem 'rspec-rails', '~> 3.7'
@@ -17,6 +19,10 @@ group :development, :test do
 end
 
 group :development do
+end
+
+group :test do
+  gem 'timecop', '0.9.1'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

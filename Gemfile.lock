@@ -50,6 +50,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    jwt (2.1.0)
     loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -130,6 +131,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (0.20.0)
     thread_safe (0.3.6)
+    timecop (0.9.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     tzinfo-data (1.2018.3)
@@ -144,11 +146,13 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  jwt (= 2.1.0)
   pg (>= 0.18, < 2.0)
   puma (~> 3.7)
   rails (~> 5.1.5)
   rspec-rails (~> 3.7)
   rubocop (= 0.53.0)
+  timecop (= 0.9.1)
   tzinfo-data
 
 RUBY VERSION
