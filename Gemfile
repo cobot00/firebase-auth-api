@@ -10,6 +10,7 @@ gem 'rails', '~> 5.2.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 gem 'bootsnap', '1.3.0'
+gem 'activestorage', '~> 5.2.0'
 
 gem 'jwt', '2.1.0'
 
