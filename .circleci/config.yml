@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/firebase-auth-api
     docker:
-      - image: circleci/ruby:2.5.0
+      - image: circleci/ruby:2.5.1
         environment:
           TZ: /usr/share/zoneinfo/Asia/Tokyo
           RAILS_ENV: test
