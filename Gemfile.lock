@@ -44,6 +44,8 @@ GEM
       tzinfo (~> 1.1)
     arel (9.0.0)
     ast (2.4.0)
+    bootsnap (1.3.0)
+      msgpack (~> 1.0)
     builder (3.2.3)
     byebug (10.0.2)
     concurrent-ruby (1.0.5)
@@ -67,6 +69,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.4-x64-mingw32)
     nio4r (2.3.1)
     nokogiri (1.8.2-x64-mingw32)
       mini_portile2 (~> 2.3.0)
@@ -153,6 +156,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bootsnap (= 1.3.0)
   byebug
   jwt (= 2.1.0)
   pg (>= 0.18, < 2.0)
