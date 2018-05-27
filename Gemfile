@@ -18,6 +18,7 @@ group :development, :test do
   gem 'rubocop', '0.53.0', require: false
   gem 'rspec-rails', '~> 3.7'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails', '~> 4.10.0'
 end
 
 group :development do
@@ -25,6 +26,7 @@ end
 
 group :test do
   gem 'timecop', '0.9.1'
+  gem 'database_cleaner', '~> 1.7.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
