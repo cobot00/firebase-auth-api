@@ -26,6 +26,7 @@ end
 
 group :test do
   gem 'timecop', '0.9.1'
+  gem 'database_cleaner', '~> 1.7.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
