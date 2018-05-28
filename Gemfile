@@ -14,6 +14,7 @@ gem 'activestorage', '~> 5.2.0'
 
 gem 'jwt', '2.1.0'
 gem 'firebase-auth', '0.1.4'
+gem 'active_model_serializers', '~> 0.10.7'
 
 group :development, :test do
   gem 'rubocop', '0.53.0', require: false
