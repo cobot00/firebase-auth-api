@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  PERMITTED_FIELDS = %i[name email password].freeze
+
   scope :active, -> { where(deleted: false) }
 
   def self.find_active(uid)
