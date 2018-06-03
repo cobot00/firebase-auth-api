@@ -12,4 +12,9 @@ class User < ApplicationRecord
     params = { uid: result.uid, name: name, email: email }
     User.create!(params)
   end
+
+  def self.disable!(id)
+    record = active.find_by!(id: id)
+    record.update!(deleted: true)
+  end
 end

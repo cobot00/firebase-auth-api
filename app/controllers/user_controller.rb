@@ -7,6 +7,13 @@ class UserController < ApplicationController
     render status: :bad_request, json: { message: e.message }
   end
 
+  def destroy
+    User.disable!(params[:id])
+    render status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render status: :bad_request, json: { message: '対象のデータが存在しません。' }
+  end
+
   private
 
   def permitted_params
