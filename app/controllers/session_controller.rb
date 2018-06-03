@@ -1,4 +1,4 @@
-class SessionController < ApplicationController
+class SessionController < ActionController::API
   def create
     begin
       result = Firebase::AuthClient.authenticate!(params[:email], params[:password])

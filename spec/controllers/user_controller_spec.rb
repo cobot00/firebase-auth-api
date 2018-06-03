@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe UserController, type: :controller do
+  before do
+    result = JwtWrapper.encode('user01', 1)
+    request.env['HTTP_AUTHORIZATION'] = 'Bearer ' + result[:jwt]
+  end
+
   describe 'DELETE #destroy' do
     let(:record) { create(:user, { uid: 'user21', name: 'ユーザー21', email: 'user21@example.com' }) }
     let(:params) { { id: record.id } }
