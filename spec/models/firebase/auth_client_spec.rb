@@ -93,12 +93,12 @@ RSpec.describe Firebase::AuthClient, type: :model do
       it 'Firebaseに認証され、トークンがリフレッシュされる' do
         if email.present? && password.present?
           response = Firebase::AuthClient.authenticate!(email, password)
-          authorization_header = "Bearer #{response[:refresh_token]}, Session #{response[:session_token]}"
+          authorization_header = "Bearer #{response[:refresh_token]}"
           sleep(2) # 有効期間を変更させてトークンを置き換えさせるためにシステム時刻を進める
           result = Firebase::AuthClient.refresh!(authorization_header)
 
           expect(result.size).to eq 3
-          expect(result[:session_token]).not_to eq response[:session_token]
+          expect(result[:session_token]).not_to be_nil
           expect(result[:refresh_token]).not_to be_nil
           expect(result[:expired_at]).not_to be_nil
         end
@@ -115,7 +115,7 @@ RSpec.describe Firebase::AuthClient, type: :model do
       it '例外が発生する' do
         if email.present? && password.present?
           response = Firebase::AuthClient.authenticate!(email, password)
-          authorization_header = "Bearer #{response[:refresh_token]}, JWT #{response[:session_token]}"
+          authorization_header = "Bearer #{response[:refresh_token]}}"
 
           user = User.find_by(uid: ENV['FIREBASE_UID'])
           user.update(deleted: true)

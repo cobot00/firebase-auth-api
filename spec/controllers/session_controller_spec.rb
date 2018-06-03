@@ -4,6 +4,7 @@ RSpec.describe SessionController, type: :controller do
   let(:email) { ENV['FIREBASE_EMAIL'] }
   let(:password) { ENV['FIREBASE_PASSWORD'] }
   let(:uid) { ENV['FIREBASE_UID'] }
+  let(:refresh_token) { ENV['FIREBASE_REFRESH_TOKEN'] }
 
   describe 'POST #create' do
     context 'ユーザーが登録されている' do
@@ -61,6 +62,48 @@ RSpec.describe SessionController, type: :controller do
 
           json = JSON.parse(response.body, { symbolize_names: true })
           expect(json[:message]).to eq 'メールアドレスまたはパスワードに誤りがあります'
+        end
+      end
+    end
+  end
+
+  describe 'POST #update' do
+    before do
+      request.env['HTTP_AUTHORIZATION'] = "Bearer #{refresh_token}"
+    end
+
+    context 'ユーザーが登録されている' do
+      before do
+        if ENV['FIREBASE_UID'].present?
+          create :user, { uid: ENV['FIREBASE_UID'] }
+        end
+      end
+
+      it 'リフレッシュされたトークンが返される' do
+        if refresh_token.present?
+          put :update, params: {}
+          expect(response).to have_http_status(:success)
+
+          json = JSON.parse(response.body)
+          expect(json.size).to eq(3)
+          expect(json['session_token']).not_to be_nil
+          expect(json['refresh_token']).not_to be_nil
+          expect(json['expired_at']).not_to be_nil
+        end
+      end
+    end
+
+    context 'ユーザーが削除されている' do
+      before do
+        if ENV['FIREBASE_UID'].present?
+          create :user, { uid: ENV['FIREBASE_UID'], deleted: true }
+        end
+      end
+
+      it '401エラーが返される' do
+        if refresh_token.present?
+          put :update, params: {}
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end

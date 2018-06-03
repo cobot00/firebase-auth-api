@@ -55,15 +55,13 @@ module Firebase
 
     def self.refresh!(authorization_header)
       raise ArgumentError.new('No Authorization header') unless authorization_header
-      tokens = parse_authorization_header(authorization_header)
+      token = authorization_header.split(/\s/)[1]
 
-      response = refresh_token!(tokens[:refresh_token])
+      response = refresh_token!(token)
       user = User.find_active(response.uid)
       raise Firebase::AuthenticationException.new unless user
 
-      decoded = JwtWrapper.decode(tokens[:session_token], false)
-
-      encode(response.uid, decoded.user_id, response.refresh_token)
+      encode(response.uid, user.id, response.refresh_token)
     end
 
     def self.refresh_token!(refresh_token)
@@ -88,13 +86,6 @@ module Firebase
         { session_token: result[:jwt],
           refresh_token: refresh_token,
           expired_at: result[:expired_at] }
-      end
-
-      def parse_authorization_header(header)
-        tokens = header.split(',')
-        refresh_token = tokens[0].split(/\s/)[1]
-        session_token = tokens[1].strip.split(/\s/)[1]
-        { refresh_token: refresh_token, session_token: session_token }
       end
 
       def validate_session_token!(session_token)

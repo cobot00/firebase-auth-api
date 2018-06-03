@@ -7,4 +7,13 @@ class SessionController < ApplicationController
       render status: :bad_request, json: { message: e.message }
     end
   end
+
+  def update
+    begin
+      result = Firebase::AuthClient.refresh!(request.headers[:Authorization])
+      render json: SessionSerializer.new(result).serialize
+    rescue Firebase::AuthenticationException
+      render status: :unauthorized
+    end
+  end
 end
