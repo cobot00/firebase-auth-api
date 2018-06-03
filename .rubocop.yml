@@ -88,6 +88,9 @@ Style/FrozenStringLiteralComment:
 Style/GuardClause:
   Enabled: false
 
+Style/Lambda:
+  Enabled: false
+
 Style/Next:
   Enabled: false
 
@@ -100,7 +103,7 @@ Style/RaiseArgs:
 Style/RedundantBegin:
   Enabled: false
 
-Style/Lambda:
+Style/RescueStandardError:
   Enabled: false
 
 Rails/SkipsModelValidations:
