@@ -7,6 +7,12 @@ class UserController < ApplicationController
     render status: :bad_request, json: { message: e.message }
   end
 
+  def current
+    render json: User.find_with_id(user_id)
+  rescue ActiveRecord::RecordNotFound
+    render status: :bad_request, json: { message: '対象のデータが存在しません。' }
+  end
+
   def destroy
     User.disable!(params[:id])
     render status: :ok

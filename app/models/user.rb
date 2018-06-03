@@ -7,6 +7,10 @@ class User < ApplicationRecord
     active.find_by(uid: uid)
   end
 
+  def self.find_with_id(id)
+    active.find_by!(id: id)
+  end
+
   def self.sign_up!(email, password, name)
     result = Firebase::AuthClient.sign_up!(email, password)
     params = { uid: result.uid, name: name, email: email }

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   put '/session', to: 'session#update'
 
   resources :user, only: %i[create destroy]
+  get '/user/current', to: 'user#current'
 end
