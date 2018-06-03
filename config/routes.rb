@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :session, only: %i[create]
+  put '/session', to: 'session#update'
+
+  resources :user, only: %i[create destroy]
+  get '/user/current', to: 'user#current'
 end

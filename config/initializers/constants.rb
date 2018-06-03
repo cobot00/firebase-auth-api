@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module CONSTANTS
   JWT_ALGORITHMS_TYPE = ENV['JWT_ALGORITHMS_TYPE']
   JWT_SECRET_KEY = ENV['JWT_SECRET_KEY']
@@ -18,4 +16,8 @@ module HTTP
   ACCESS_CONTROL_ALLOW_METHODS = %w[GET OPTIONS].freeze
   ACCESS_CONTROL_ALLOW_HEADERS = %w[Accept Origin Content-Type Authorization].freeze
   ACCESS_CONTROL_MAX_AGE = 86400
+end
+
+module FIREBASE
+  API_KEY = ENV['FIREBASE_API_KEY']
 end

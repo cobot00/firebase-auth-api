@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe JwtWrapper do
-  let(:token) { 'eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiJkdW1teSIsImFjY291bnRfaWQiOjEsImlzcyI6ImZpcmJhc2UtYXV0aC1hcGkiLCJleHAiOjE1MjE3Mzk5MDl9.3xHicg0ygfFGT-H12XwywA8AblK2ggHAKE3qIAMcHRc' }
+  let(:token) { ENV['JWT_TEST_TOKEN'] }
   let(:headers) { { Authorization: 'Bearer ' + token } }
 
   describe '.decode' do
     context 'トークンの有効期限が過ぎている' do
       before do
-        Timecop.freeze(Time.zone.local(2018, 3, 23, 9, 0, 0))
+        Timecop.freeze(Time.zone.local(2018, 5, 28, 1, 0, 0))
       end
 
       after do
@@ -15,14 +15,18 @@ describe JwtWrapper do
       end
 
       it '有効期限切れで例外が発生する' do
-        expect { JwtWrapper.decode(token) }
-              .to raise_error(JWT::ExpiredSignature, 'Signature has expired')
+        if token
+          expect { JwtWrapper.decode(token) }
+                .to raise_error(JWT::ExpiredSignature, 'Signature has expired')
+        end
       end
 
       it 'セッション情報が返される' do
-        result = JwtWrapper.decode(token, false)
-        expect(result.account_id).to eq 1
-        expect(result.uid).to eq 'dummy'
+        if token
+          result = JwtWrapper.decode(token, false)
+          expect(result.user_id).to eq 1
+          expect(result.uid).to eq 'dummy'
+        end
       end
     end
   end
@@ -37,8 +41,8 @@ describe JwtWrapper do
       Timecop.return
     end
 
-    it 'JWTのaccount_idを返す' do
-      expect(JwtWrapper.decode_jwt(headers).account_id).to eq 1
+    it 'JWTのuser_idを返す' do
+      expect(JwtWrapper.decode_jwt(headers).user_id).to eq 1 if token
     end
   end
 end
